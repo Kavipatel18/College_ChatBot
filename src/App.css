@@ -25,14 +25,3 @@
 .chatbot-button:hover {
   background-color: #0056b3;
 }
-
-.chatbot {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}

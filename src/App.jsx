@@ -10,13 +10,19 @@ function App() {
     setShowChatbot(!showChatbot);
   };
 
+  const closeChatbot = () => {
+    setShowChatbot(false);
+  };
+
   return (
     <div className="App">
       <Dashboard />
-      <button className="chatbot-button" onClick={toggleChatbot}>
-        Chat with us
-      </button>
-      {showChatbot && <Chatbot />}
+      {!showChatbot && (
+        <button className="chatbot-button" onClick={toggleChatbot}>
+          Chat with us
+        </button>
+      )}
+      {showChatbot && <Chatbot onClose={closeChatbot} />}
     </div>
   );
 }

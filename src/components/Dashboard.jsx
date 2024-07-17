@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import Dashboard from "./components/Dashboard";
-import Chatbot from "./components/Chatbot";
-import "./App.css";
+import React from "react";
 
-function App() {
-  const [showChatbot, setShowChatbot] = useState(false);
-
-  const toggleChatbot = () => {
-    setShowChatbot(!showChatbot);
-  };
-
+const Dashboard = () => {
   return (
-    <div className="App">
-      <Dashboard />
-      <button className="chatbot-button" onClick={toggleChatbot}>
-        Chat with us
-      </button>
-      {showChatbot && <Chatbot />}
+    <div className="dashboard">
+      <h1>BVM Dashboard</h1>
+      {/* Add your dashboard content here */}
     </div>
   );
-}
+};
 
-export default App;
+export default Dashboard;
