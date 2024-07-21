@@ -15,7 +15,7 @@ function App() {
 
   const closeChatbot = () => {
     setShowChatbot(false);
-    clearMessages(); // Clear messages when closing
+    clearMessages();
   };
 
   const addMessage = (message) => {

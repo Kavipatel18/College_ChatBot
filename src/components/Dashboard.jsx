@@ -6,7 +6,7 @@ const Dashboard = () => {
     <div className="dashboard">
       {/* <h1>BVM Dashboard</h1> */}
       <iframe
-        src="https://bvmengineering.ac.in/" // Replace with the URL of the website you want to embed
+        src="https://bvmengineering.ac.in/"
         title="Embedded Website"
         className="embedded-website"
         frameBorder="0"

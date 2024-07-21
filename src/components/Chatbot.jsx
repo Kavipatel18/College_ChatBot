@@ -7,9 +7,14 @@ import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 const Chatbot = ({ onClose }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isBotResponding, setIsBotResponding] = useState(false); // State for bot response
+
+  // State for bot response
+  const [isBotResponding, setIsBotResponding] = useState(false);
+
   const messagesEndRef = useRef(null);
-  const inputRef = useRef(null); // Ref for the input field
+
+  // Ref for the input field
+  const inputRef = useRef(null);
 
   // Load messages from localStorage when component mounts
   useEffect(() => {
@@ -41,7 +46,9 @@ const Chatbot = ({ onClose }) => {
     if (input.trim()) {
       setMessages([...messages, { sender: "user", text: input }]);
       setInput("");
-      setIsBotResponding(true); // Set bot responding to true
+
+      // Set bot responding to true
+      setIsBotResponding(true);
 
       // Simulate a response from the chatbot
       setTimeout(() => {
@@ -49,7 +56,9 @@ const Chatbot = ({ onClose }) => {
           ...prevMessages,
           { sender: "bot", text: "This is a response from the bot." },
         ]);
-        setIsBotResponding(false); // Set bot responding to false
+
+        // Set bot responding to false
+        setIsBotResponding(false);
       }, 1000);
     } else {
       toast.error("Please type a message before sending.");
@@ -65,8 +74,6 @@ const Chatbot = ({ onClose }) => {
 
   const handleClose = () => {
     onClose();
-    // Optionally clear messages from state here, but not from localStorage
-    // setMessages([]);
   };
 
   return (
@@ -93,8 +100,8 @@ const Chatbot = ({ onClose }) => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Type a message..."
-          disabled={isBotResponding} // Disable input if bot is responding
-          ref={inputRef} // Attach ref to input
+          disabled={isBotResponding}
+          ref={inputRef}
         />
         <button onClick={handleSendMessage} disabled={isBotResponding}>
           Send
