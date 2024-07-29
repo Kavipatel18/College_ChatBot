@@ -1,11 +1,10 @@
-function showChatBot() {
+function toggleChatBot() {
   const chatbotContainer = document.getElementById("chatbotContainer");
-  chatbotContainer.style.display = "block";
-}
-
-function hideChatBot() {
-  const chatbotContainer = document.getElementById("chatbotContainer");
-  chatbotContainer.style.display = "none";
+  if (chatbotContainer.style.display === "block") {
+    chatbotContainer.style.display = "none";
+  } else {
+    chatbotContainer.style.display = "block";
+  }
 }
 
 function showGif() {
@@ -28,6 +27,7 @@ function sendMessage() {
   if (message) {
     const chatbotBody = document.getElementById("chatbotBody");
     const messageElement = document.createElement("div");
+    messageElement.classList.add("chat-message");
     messageElement.textContent = message;
     chatbotBody.appendChild(messageElement);
     chatInput.value = "";
