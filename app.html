@@ -11,21 +11,24 @@
 </head>
 
 <body>
-    <button class="chatBot-button" onclick="showChatBot()">
-        <img src="./Photo/blink.gif" alt="Blink Sticker" />
+    <button class="chatBot-button" onclick="toggleChatBot()">
+        <img src="./Photo/blink.gif" alt="Chatbot" class="chatbot-icon" />
     </button>
+    <div id="gifContainer" class="gif-container">
+        <img src="./Photo/blink.gif" alt="Blink Sticker" />
+    </div>
     <iframe src="http://bvmengineering.ac.in:8888" class="bvm-website" allowfullscreen></iframe>
     <div id="chatbotContainer" class="chatbot-container">
         <div class="chatbot-header">
             <span>Chatbot</span>
-            <button class="close-btn" onclick="hideChatBot()">X</button>
+            <button class="close-btn" onclick="toggleChatBot()">X</button>
         </div>
         <div class="chatbot-body" id="chatbotBody">
             <!-- Chat messages will go here -->
         </div>
         <div class="chatbot-footer">
             <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)" />
-            <button onclick="sendMessage()">Send</button>
+            <button class="send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 </body>
