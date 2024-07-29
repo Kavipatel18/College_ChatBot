@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BVM ChatBot</title>
+    <link rel="icon" type="image/svg+xml" href="./Photo/BVM Logo-1.png" />
+    <link rel="stylesheet" href="./app.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <button class="chatBot-button" onclick="showChatBot()">Click me</button>
+    <div id="gifContainer" class="gif-container">
+      <img src="./Photo/blink.gif" alt="Blink Sticker" />
+    </div>
+    <iframe
+      src="http://bvmengineering.ac.in:8888"
+      class="bvm-website"
+      allowfullscreen
+    ></iframe>
+    <div id="chatbotContainer" class="chatbot-container">
+      <div class="chatbot-header">
+        <span>Chatbot</span>
+        <button class="close-btn" 2onclick="hideChatBot()">X</button>
+      </div>
+      <div class="chatbot-body" id="chatbotBody">
+        <!-- Chat messages will go here -->
+      </div>
+      <div class="chatbot-footer">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Type a message..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </body>
+</html>
