@@ -11,7 +11,7 @@
   </head>
   <body>
     <div id="app" class="App">
-      <div class="dashboard">
+      <div class="dashboard" id="dashboard">
         <iframe
           src="https://bvmengineering.ac.in/"
           title="Embedded Website"
@@ -24,8 +24,10 @@
       <button id="chatbot-button" class="chatbot-button">
         <img src="./Photo/blink.gif" alt="Blink Sticker" class="chatBot-gif" />
       </button>
-      <div id="tipMessage" class="tip-message">
-        Click the chat icon to start chatting!
+      <div id="tipMessageContainer" class="tip-messageContainer">
+        <div id="tipMessage" class="tip-message">
+          Click the chat icon to start chatting!
+        </div>
       </div>
       <div id="chatbot" class="chatbot hidden">
         <div class="chatbot-header">

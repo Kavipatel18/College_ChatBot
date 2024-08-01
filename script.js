@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JavaScript is loaded and DOM is ready.");
-
+  localStorage.removeItem("chatMessages");
   const chatbotButton = document.getElementById("chatbot-button");
+  const bvm = document.getElementById("bvmWeb");
   const chatbot = document.getElementById("chatbot");
   const chatbotClose = document.getElementById("chatbot-close");
   const chatbotMessages = document.getElementById("chatbot-messages");
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let messages = [];
   let isBotResponding = false;
+  let tipMessageTimeout;
 
   // Load stored messages
   try {
@@ -28,7 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
     messages.forEach((message) => {
       const messageDiv = document.createElement("div");
       messageDiv.classList.add("message", message.sender);
-      messageDiv.textContent = message.text;
+
+      const logo = document.createElement("img");
+      if (message.sender === "user") {
+        logo.src = "./Photo/user.png"; // Path to user logo
+        logo.alt = "User Logo";
+      } else {
+        logo.src = "../Photo/BVM Logo-1.png"; // Path to bot logo
+        logo.alt = "BVM Logo";
+      }
+
+      const text = document.createElement("span");
+      text.textContent = message.text;
+
+      messageDiv.appendChild(logo);
+      messageDiv.appendChild(text);
       chatbotMessages.appendChild(messageDiv);
     });
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -92,9 +108,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeChatbot = () => {
     chatbot.classList.add("hidden");
-    messages = [];
+    messages = []; // Clear messages on close
     localStorage.setItem("chatMessages", JSON.stringify(messages));
     chatbotInput.focus();
+  };
+
+  const showTipMessage = () => {
+    const tipMessage = document.getElementById("tipMessage");
+    tipMessage.style.display = "block";
+    clearTimeout(tipMessageTimeout);
+    tipMessageTimeout = setTimeout(() => {
+      tipMessage.style.display = "none";
+    }, 5000); // Hide the tip message after 5 seconds
+  };
+
+  const hideTipMessage = () => {
+    const tipMessage = document.getElementById("tipMessage");
+    tipMessage.style.display = "none";
+    clearTimeout(tipMessageTimeout);
   };
 
   // Open/Close Chatbot
@@ -105,6 +136,9 @@ document.addEventListener("DOMContentLoaded", () => {
       chatbotInput.focus();
     }
     e.stopPropagation(); // Prevent click from closing the chatbot immediately
+
+    // Hide the tip message immediately if it's currently displayed
+    hideTipMessage();
   });
 
   chatbotClose.addEventListener("click", (e) => {
@@ -125,7 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMessages();
 
   // Close chatbot if clicking outside
-  document.addEventListener("click", (event) => {
+  bvm.addEventListener("click", (event) => {
+    console.log("outside click");
     if (
       !chatbot.contains(event.target) &&
       !chatbotButton.contains(event.target) &&
@@ -139,16 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
   chatbot.addEventListener("click", (event) => {
     event.stopPropagation();
   });
-});
 
-window.onload = () => {
   showTipMessage();
-};
-
-function showTipMessage() {
-  const tipMessage = document.getElementById("tipMessage");
-  tipMessage.style.display = "block";
-  setTimeout(() => {
-    tipMessage.style.display = "none";
-  }, 5000); // Hide the tip message after 5 seconds
-}
+});
