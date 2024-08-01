@@ -43,8 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const text = document.createElement("span");
       text.textContent = message.text;
 
-      messageDiv.appendChild(logo);
-      messageDiv.appendChild(text);
+      if (message.sender === "user") {
+        messageDiv.appendChild(text);
+        messageDiv.appendChild(logo);
+      } else {
+        messageDiv.appendChild(logo);
+        messageDiv.appendChild(text);
+      }
       chatbotMessages.appendChild(messageDiv);
     });
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
