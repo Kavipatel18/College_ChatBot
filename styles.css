@@ -1,12 +1,21 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .App {
     font-family: Arial, sans-serif;
     text-align: center;
 }
-.chatBot-gif{
+
+.chatBot-gif {
     border-radius: 30%;
-        height: 70px;
-        width: 70px;
+    height: 70px;
+    width: 70px;
 }
+
 .chatbot-button {
     position: fixed;
     bottom: 45px;
@@ -18,10 +27,17 @@
     width: 60px;
     height: 60px;
     font-size: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     cursor: pointer;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -55,8 +71,14 @@ iframe {
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #ddd;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     z-index: 1000;
     overflow: hidden;
@@ -70,8 +92,14 @@ iframe {
     background-color: #890521;
     color: white;
     padding: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     font-size: 16px;
     font-weight: bold;
@@ -91,39 +119,57 @@ iframe {
 }
 
 .chatbot-messages {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     padding: 15px;
     overflow-y: auto;
     background-color: #f9f9f9;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
+
 .message {
     margin-bottom: 12px;
     padding: 12px;
     border-radius: 10px;
     max-width: 75%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
 }
 
 .message.user {
-    background-color:transparent;
+    background-color: transparent;
     color: black;
+    -ms-flex-item-align: end;
     align-self: flex-end;
     text-align: right;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
 }
 
-span{
-    text-align: justify;
+span {
+    text-align: left;
 }
 
 .message.bot {
-    background-color:transparent;
+    background-color: transparent;
     color: black;
+    -ms-flex-item-align: start;
     align-self: flex-start;
     text-align: left;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: flex-start;
 }
 
@@ -148,6 +194,8 @@ span{
 
 
 .chatbot-input {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
     border-top: 1px solid #ddd;
@@ -155,6 +203,8 @@ span{
 }
 
 .chatbot-input input {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     padding: 12px;
     border: 1px solid #ddd;
@@ -185,49 +235,29 @@ span{
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.tip-messageContainer{
-    position: fixed;
-        top: 10px;
-        right: 10px;
-        left: 50px;
-        z-index: 1001;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-}
-.tip-message{
-    display: flex;
-        align-items: center;
-        background-color: #fff;
-        color: #333;
-        margin-top: 15px;
-        margin-left: 950px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-left: 5px solid #077e20;
-        position: relative;
-        animation: fadeInOut 5s ease-in-out;
-        max-width: 300px;
-        /* Set a maximum width */
-        min-width: 250px;
-        /* Set a minimum width */
-        width: auto;
-        /* Ensure the width is adjusted automatically */
-}
-.toast-container  {
+
+.tip-messageContainer {
     position: fixed;
     top: 10px;
     right: 10px;
-    left:50px;
+    left: 50px;
     z-index: 1001;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 10px;
 }
 
-.toast {
+.tip-message {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     background-color: #fff;
     color: #333;
@@ -235,9 +265,54 @@ span{
     margin-left: 950px;
     padding: 10px 20px;
     border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #077e20;
+    position: relative;
+    -webkit-animation: fadeInOut 5s ease-in-out;
+    animation: fadeInOut 5s ease-in-out;
+    max-width: 300px;
+    /* Set a maximum width */
+    min-width: 250px;
+    /* Set a minimum width */
+    width: auto;
+    /* Ensure the width is adjusted automatically */
+}
+
+.toast-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    left: 50px;
+    z-index: 1001;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    color: #333;
+    margin-top: 15px;
+    margin-left: 950px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-left: 5px solid #f44336;
     position: relative;
+    -webkit-animation: fadeInOut 5s ease-in-out;
     animation: fadeInOut 5s ease-in-out;
     max-width: 300px;
     /* Set a maximum width */
@@ -265,24 +340,54 @@ span{
     color: #333;
 }
 
-@keyframes fadeInOut {
+@-webkit-keyframes fadeInOut {
     0% {
         opacity: 0;
+        -webkit-transform: translateY(-20px);
         transform: translateY(-20px);
     }
 
     10% {
         opacity: 1;
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
 
     90% {
         opacity: 1;
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
 
     100% {
         opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    10% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
         transform: translateY(-20px);
     }
 }
