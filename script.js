@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JavaScript is loaded and DOM is ready.");
   localStorage.removeItem("chatMessages");
@@ -14,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let isBotResponding = false;
   let tipMessageTimeout;
 
-  // Load stored messages
   try {
     const storedMessages = localStorage.getItem("chatMessages");
     if (storedMessages) {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (e) {
     console.error("Error parsing chatMessages from localStorage", e);
-    localStorage.removeItem("chatMessages"); // Clear corrupted data
+    localStorage.removeItem("chatMessages");
   }
 
   const renderMessages = () => {
@@ -33,18 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const logo = document.createElement("img");
       if (message.sender === "user") {
-        logo.src = "./Photo/user.png"; // Path to user logo
+        logo.src = "./Photo/user.png";
         logo.alt = "User Logo";
       } else {
-        logo.src = "../Photo/BVM Logo-1.png"; // Path to bot logo
+        logo.src = "../Photo/BVM Logo-1.png";
         logo.alt = "BVM Logo";
       }
 
       const text = document.createElement("span");
       text.textContent = message.text;
 
-      messageDiv.appendChild(logo);
-      messageDiv.appendChild(text);
+      if (message.sender === "user") {
+        messageDiv.appendChild(text);
+        messageDiv.appendChild(logo);
+      } else {
+        messageDiv.appendChild(logo);
+        messageDiv.appendChild(text);
+      }
       chatbotMessages.appendChild(messageDiv);
     });
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -56,14 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const icon = document.createElement("span");
     icon.classList.add("icon");
-    icon.innerHTML = "&#x26A0;"; // Warning icon (exclamation in triangle)
+    icon.innerHTML = "&#x26A0;";
 
     const text = document.createElement("span");
     text.textContent = message;
 
     const closeBtn = document.createElement("span");
     closeBtn.classList.add("close");
-    closeBtn.innerHTML = "&times;"; // Close icon
+    closeBtn.innerHTML = "&times;";
     closeBtn.onclick = () => toast.remove();
 
     toast.appendChild(icon);
@@ -77,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     const inputText = chatbotInput.value.trim();
     if (inputText) {
       messages.push({ sender: "user", text: inputText });
@@ -89,18 +94,29 @@ document.addEventListener("DOMContentLoaded", () => {
       chatbotInput.disabled = true;
       chatbotSend.disabled = true;
 
-      setTimeout(() => {
-        messages.push({
-          sender: "bot",
-          text: "This is a response from the bot.",
+      try {
+        const response = await fetch("http://127.0.0.1:5000/chatbot", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_input: inputText }),
         });
+        const data = await response.json();
+
+        messages.push({ sender: "bot", text: data.response });
         renderMessages();
         localStorage.setItem("chatMessages", JSON.stringify(messages));
-        isBotResponding = false;
-        chatbotInput.disabled = false;
-        chatbotSend.disabled = false;
-        chatbotInput.focus();
-      }, 1000);
+      } catch (error) {
+        console.error("Error sending message to chatbot", error);
+        messages.push({ sender: "bot", text: "Sorry, something went wrong." });
+        renderMessages();
+      }
+
+      isBotResponding = false;
+      chatbotInput.disabled = false;
+      chatbotSend.disabled = false;
+      chatbotInput.focus();
     } else {
       showMessageToast("Please type a message before sending.");
     }
@@ -108,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeChatbot = () => {
     chatbot.classList.add("hidden");
-    messages = []; // Clear messages on close
+    messages = [];
     localStorage.setItem("chatMessages", JSON.stringify(messages));
     chatbotInput.focus();
   };
@@ -119,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(tipMessageTimeout);
     tipMessageTimeout = setTimeout(() => {
       tipMessage.style.display = "none";
-    }, 5000); // Hide the tip message after 5 seconds
+    }, 5000);
   };
 
   const hideTipMessage = () => {
@@ -128,23 +144,18 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(tipMessageTimeout);
   };
 
-  // Open/Close Chatbot
   chatbotButton.addEventListener("click", (e) => {
-    console.log("Chatbot button clicked");
     chatbot.classList.toggle("hidden");
     if (!chatbot.classList.contains("hidden")) {
       chatbotInput.focus();
     }
-    e.stopPropagation(); // Prevent click from closing the chatbot immediately
-
-    // Hide the tip message immediately if it's currently displayed
+    e.stopPropagation();
     hideTipMessage();
   });
 
   chatbotClose.addEventListener("click", (e) => {
-    console.log("Chatbot close button clicked");
     closeChatbot();
-    e.stopPropagation(); // Prevent click from closing the chatbot immediately
+    e.stopPropagation();
   });
 
   chatbotInput.addEventListener("keydown", (e) => {
@@ -158,9 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderMessages();
 
-  // Close chatbot if clicking outside
   bvm.addEventListener("click", (event) => {
-    console.log("outside click");
     if (
       !chatbot.contains(event.target) &&
       !chatbotButton.contains(event.target) &&
@@ -170,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Prevent event propagation for chatbot container
   chatbot.addEventListener("click", (event) => {
     event.stopPropagation();
   });
