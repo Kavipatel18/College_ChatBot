@@ -16,6 +16,7 @@
   width: 70px;
 }
 .chatbot-button {
+  display: none; /* Hide initially */
   position: fixed;
   bottom: 45px;
   right: 30px;
@@ -26,17 +27,10 @@
   width: 60px;
   height: 60px;
   font-size: 24px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -65,8 +59,10 @@ iframe {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  height: 500px;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vh;
+  max-height: 500px;
   background-color: #ffffff;
   border-radius: 10px;
   border: 2px solid #e1b382;
@@ -98,10 +94,13 @@ iframe {
 
 .chatbot-header h3 {
   align-content: center;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 23px;
+  /* font-weight: bold; */
+  font-family: ProductSans, "open sans", arial, sans-serif;
+  font-weight: 549;
   margin: 0;
   padding-left: 80px;
+  z-index: 100;
 }
 
 .chatbot-close {
@@ -241,7 +240,9 @@ span {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .tip-messageContainer {
+  display: none;
   position: fixed;
   top: 10px;
   right: 10px;
@@ -282,6 +283,7 @@ span {
   width: auto;
   /* Ensure the width is adjusted automatically */
 }
+
 .toast-container {
   position: fixed;
   top: 10px;
