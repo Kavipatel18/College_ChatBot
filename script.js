@@ -1,5 +1,4 @@
 // script.js
-//hello
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JavaScript is loaded and DOM is ready.");
   localStorage.removeItem("chatMessages");
