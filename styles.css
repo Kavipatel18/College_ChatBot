@@ -10,38 +10,36 @@
   font-family: ProductSans, "open sans", arial, sans-serif;
   text-align: center;
 }
+
 .chatBot-gif {
+  display: none;
   border-radius: 30%;
   height: 70px;
   width: 70px;
 }
+
 .chatbot-button {
+  display: none;
+  /* Hide initially */
   position: fixed;
   bottom: 45px;
   right: 30px;
-  background-color: #007bff;
+  background-color: transparent;
   color: white;
   border: none;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   font-size: 24px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  /* display: flex; */
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .chatbot-button:hover {
-  background-color: #0056b3;
+  background-color: transparent;
 }
 
 .dashboard {
@@ -65,8 +63,11 @@ iframe {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  height: 500px;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vh;
+  max-height: 500px;
+  min-height: 300px;
   background-color: #ffffff;
   border-radius: 10px;
   border: 2px solid #e1b382;
@@ -98,10 +99,13 @@ iframe {
 
 .chatbot-header h3 {
   align-content: center;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 23px;
+  /* font-weight: bold; */
+  font-family: ProductSans, "open sans", arial, sans-serif;
+  font-weight: 549;
   margin: 0;
   padding-left: 80px;
+  z-index: 100;
 }
 
 .chatbot-close {
@@ -137,6 +141,7 @@ iframe {
   flex-direction: column;
   padding-bottom: 5px;
 }
+
 .message {
   padding: 10px;
   border-radius: 10px;
@@ -241,7 +246,9 @@ span {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .tip-messageContainer {
+  display: none;
   position: fixed;
   top: 10px;
   right: 10px;
@@ -249,13 +256,14 @@ span {
   z-index: 1001;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 10px;
 }
+
 .tip-message {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -282,6 +290,7 @@ span {
   width: auto;
   /* Ensure the width is adjusted automatically */
 }
+
 .toast-container {
   position: fixed;
   top: 10px;
