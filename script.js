@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JavaScript is loaded and DOM is ready.");
   localStorage.removeItem("chatMessages");
+
   const chatbotButton = document.getElementById("chatbot-button");
   const chatbotGif = document.getElementById("chatBot-gif");
   const bvm = document.getElementById("bvmWeb");
@@ -12,18 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatbotSend = document.getElementById("chatbot-send");
   const toastContainer = document.getElementById("toast-container");
   const tipMessageContainer = document.getElementById("tipMessageContainer");
-  const tipMessage = document.getElementById("tipMessage");
 
   // Hide chatbot button initially
   chatbotButton.style.display = "none";
   tipMessageContainer.style.display = "none";
-  chatbotGif.style.display = "none";
 
   // Show the chatbot button after iframe is loaded
   bvm.addEventListener("load", () => {
     chatbotButton.style.display = "flex"; // Show the chatbot button
     tipMessageContainer.style.display = "flex";
-    chatbotGif.style.display = "flex";
   });
 
   let messages = [];
@@ -226,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chatbot.classList.add("hidden");
     messages = [];
     localStorage.setItem("chatMessages", JSON.stringify(messages));
-    chatbotInput.focus();
+    // chatbotInput.focus();
   };
 
   const showTipMessage = () => {
@@ -282,12 +280,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderMessages();
 
-  bvm.addEventListener("click", (event) => {
+  document.addEventListener("click", (event) => {
     if (
       !chatbot.contains(event.target) &&
       !chatbotButton.contains(event.target) &&
       !chatbot.classList.contains("hidden")
     ) {
+      console.log(event);
       closeChatbot();
     }
   });
