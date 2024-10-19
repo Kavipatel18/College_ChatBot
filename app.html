@@ -7,9 +7,17 @@
     <link rel="icon" type="image/svg+xml" href="./Photo/BVM Logo-1.png" />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
+    <meta
+      content="213002807400-lmj00ibbvr0ccc5nv2rekv18vnindhe3.apps.googleusercontent.com"
+    />
+   
+
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
   <body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <div id="app" class="App">
       <div class="dashboard" id="dashboard">
         <iframe
@@ -38,13 +46,21 @@
         <div class="chatbot-header">
           <button id="chatbot-close" class="chatbot-close">X</button>
           <h3>BVM ChatBot</h3>
+          
+          <img src="./Photo/user.png" id="photo" class="photo"></img>
         </div>
 
-        <div id="chatbot-messages" class="chatbot-messages">
-          <!-- <div id="predefined-questions-container" style="display: none;"></div>
-          Predefined questions will be inserted here dynamically by JavaScript
-          </div> -->
-        </div>
+        <div id="chatbot-messages" class="chatbot-messages"></div>
+        <div id="login-container" class="login-container">
+  <div class="login-header">
+    
+    <h3>Login to Continue</h3>
+    <span id="close-login" class="close-login">&times;</span>
+  </div>
+  <!-- <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo"> -->
+  <div id="google-login-btn"></div>
+</div>
+
         <div class="chatbot-input">
           <input
             id="chatbot-input"
