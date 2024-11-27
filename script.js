@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userEmail: sessionStorage.getItem("userEmail"),
     userPic: sessionStorage.getItem("userPic"),
     isBotResponding: false,
+    nextReco: null,
     tipMessageTimeout: null,
     isFirstChatOpen: true,
     no_of_message: parseInt(localStorage.getItem("no_of_message")) || 0,
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.chatbotGif.style.display = "flex";
   });
 
-  const predefinedQuestions = [
+  var predefinedQuestions = [
     {
       question: "About BVM",
       answer: `Birla Vishvakarma Mahavidyalaya (BVM) is one of the premier engineering institutes located in Vallabh Vidyanagar, Gujarat. 
@@ -202,7 +203,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Google API
   function initializeGoogleIdentity() {
     google.accounts.id.initialize({
-      client_id: "your_client_id",
+      client_id:
+        "213002807400-lmj00ibbvr0ccc5nv2rekv18vnindhe3.apps.googleusercontent.com",
       callback: handleGoogleLoginResponse,
       auto_select: false,
       cancel_on_tap_outside: true,
@@ -428,6 +430,22 @@ document.addEventListener("DOMContentLoaded", () => {
           // addPredefinedAnswer(q.answer);
         });
     });
+    if (state.nextReco) {
+      const nextRecoDiv = document.createElement("div");
+      nextRecoDiv.classList.add("predefined_message", "bot", "next-reco");
+      nextRecoDiv.innerHTML = `<text class="predefined-question">${state.nextReco[1]}</text>`;
+
+      messageGroupDiv.appendChild(nextRecoDiv);
+
+      nextRecoDiv
+        .querySelector(".predefined-question")
+        .addEventListener("click", () => {
+          handleSendMessage(state.nextReco[1]);
+          // Clear nextReco after it's used
+          state.nextReco = null;
+        });
+    }
+
     elements.chatbotMessages.scrollTop = elements.chatbotMessages.scrollHeight;
   };
 
@@ -576,6 +594,7 @@ document.addEventListener("DOMContentLoaded", () => {
       inputText = elements.chatbotInput.value.trim();
     }
     if (inputText) {
+      state.nextReco = null;
       state.messages.push({ sender: "user", text: inputText });
       elements.chatbotInput.value = "";
       renderMessages();
@@ -614,6 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
           const data = await response.json();
 
+          state.nextReco = data.recommendations;
           if (data.responses && data.responses.length > 0) {
             data.responses.forEach((resp, index) => {
               state.messages.push({
@@ -658,7 +678,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function updateMessageCount() {
-    localStorage.setItem("no_of_message", state.no_of_message);
     fetch("http://127.0.0.1:5000/update_message_count", {
       method: "POST",
       headers: {
