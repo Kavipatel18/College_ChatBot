@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Google API
   function initializeGoogleIdentity() {
     google.accounts.id.initialize({
-      client_id: "googleclientid.apps.googleusercontent.com",
+      client_id: "googleid.apps.googleusercontent.com",
       callback: handleGoogleLoginResponse,
       auto_select: false,
       cancel_on_tap_outside: true,
@@ -429,16 +429,61 @@ document.addEventListener("DOMContentLoaded", () => {
           // addPredefinedAnswer(q.answer);
         });
     });
-    if (state.nextReco) {
+    if (state.nextReco && localStorage.getItem("isLogin")) {
       const nextRecoDiv = document.createElement("div");
-      nextRecoDiv.classList.add("predefined_message", "bot", "next-reco");
-      nextRecoDiv.innerHTML = `<text class="predefined-question">${state.nextReco[1]}</text>`;
+      nextRecoDiv.classList.add(
+        "predefined_message",
+        "bot",
+        "next-reco",
+        "recommendation-spark"
+      );
+
+      // Create a more dynamic and enticing recommendation presentation
+      const sparkleEmoji = "✨";
+      const lightBulbEmoji = "💡";
+      const magicWandEmoji = "🪄";
+
+      const catchyPhrases = [
+        "You Know!",
+        "Next level suggestion!",
+        "Curious minds, listen up!",
+      ];
+
+      const randomCatchyPhrase =
+        catchyPhrases[Math.floor(Math.random() * catchyPhrases.length)];
+
+      nextRecoDiv.innerHTML = `
+    <text class="predefined-question">
+      ${sparkleEmoji} ${randomCatchyPhrase}${lightBulbEmoji}
+      <br>
+      <strong>${state.nextReco[1]}</strong>
+      ${magicWandEmoji}
+    </text>
+  `;
+
+      // Styling to make it more attractive
+      nextRecoDiv.style.backgroundColor = "#ffe4e1";
+      nextRecoDiv.style.border = "2px dashed #ff69b4";
+      nextRecoDiv.style.transition = "all 0.3s ease";
+
+      // Hover effect for interactivity
+      nextRecoDiv.addEventListener("mouseenter", () => {
+        nextRecoDiv.style.transform = "scale(1.05)";
+        nextRecoDiv.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+      });
+
+      nextRecoDiv.addEventListener("mouseleave", () => {
+        nextRecoDiv.style.transform = "scale(1)";
+        nextRecoDiv.style.boxShadow = "none";
+      });
 
       messageGroupDiv.appendChild(nextRecoDiv);
 
       nextRecoDiv
         .querySelector(".predefined-question")
         .addEventListener("click", () => {
+          // Add a subtle animation on click
+          nextRecoDiv.style.animation = "pulse 0.5s";
           handleSendMessage(state.nextReco[1]);
           // Clear nextReco after it's used
           state.nextReco = null;
