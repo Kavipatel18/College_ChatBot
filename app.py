@@ -35,7 +35,7 @@ cache = Cache(app, config={
 DB_CONFIG = {
     'host': '127.0.0.1',
     'user': 'root',
-    'password': 'KaviPatel@123',
+    'password': 'password',
     'database': 'college_chatbot',
     'pool_name': "chatbot_pool",
     'pool_size': 5

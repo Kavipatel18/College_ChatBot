@@ -203,8 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Google API
   function initializeGoogleIdentity() {
     google.accounts.id.initialize({
-      client_id:
-        "213002807400-lmj00ibbvr0ccc5nv2rekv18vnindhe3.apps.googleusercontent.com",
+      client_id: "googleclientid.apps.googleusercontent.com",
       callback: handleGoogleLoginResponse,
       auto_select: false,
       cancel_on_tap_outside: true,
