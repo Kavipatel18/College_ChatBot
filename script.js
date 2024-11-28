@@ -443,11 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const lightBulbEmoji = "💡";
       const magicWandEmoji = "🪄";
 
-      const catchyPhrases = [
-        "You Know!",
-        "Next level suggestion!",
-        "Curious minds, listen up!",
-      ];
+      const catchyPhrases = ["Next Recommandation!"];
 
       const randomCatchyPhrase =
         catchyPhrases[Math.floor(Math.random() * catchyPhrases.length)];
