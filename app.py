@@ -35,7 +35,7 @@ cache = Cache(app, config={
 DB_CONFIG = {
     'host': '127.0.0.1',
     'user': 'root',
-    'password': 'password',
+    'password': '',
     'database': 'college_chatbot',
     'pool_name': "chatbot_pool",
     'pool_size': 5
@@ -205,6 +205,7 @@ def recommend_questions(user_inputs, top_n=5):
     
     # Cache recommendations
     cache.set(cache_key, recommended_questions)
+    print(recommend_questions)
     
     return recommended_questions
 
@@ -281,6 +282,7 @@ def get_response():
     # Get recommendations
     all_inputs = previous_questions + [user_input]
     recommendations = recommend_questions(all_inputs, top_n=5)
+    print(recommendations)
     
     return jsonify({
         "responses": responses,

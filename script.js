@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("JavaScript is loaded and DOM is ready.");
 
   // Clear local storage items
-  // localStorage.removeItem("chatMessages");
-  // localStorage.removeItem("no_of_message");
+  localStorage.removeItem("chatMessages");
+  localStorage.removeItem("no_of_message");
 
   // DOM element references
 
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Google API
   function initializeGoogleIdentity() {
     google.accounts.id.initialize({
-      client_id: "googleid.apps.googleusercontent.com",
+      client_id: "googleclientid.apps.googleusercontent.com",
       callback: handleGoogleLoginResponse,
       auto_select: false,
       cancel_on_tap_outside: true,
@@ -452,8 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <text class="predefined-question">
       ${sparkleEmoji} ${randomCatchyPhrase}${lightBulbEmoji}
       <br>
-      <strong>${state.nextReco[1]}</strong>
-      ${magicWandEmoji}
+      <strong>${state.nextReco[3]}</strong>
     </text>
   `;
 
